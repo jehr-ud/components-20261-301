@@ -48,8 +48,17 @@ class MainActivity : ComponentActivity() {
 @Composable
 fun GameScreen(modifier: Modifier = Modifier) {
 
+    var isPlayerGaming by remember { mutableStateOf(false )}
+
     var gameState by remember { mutableStateOf(GameStateEnum.LEVEL) }
     var level by remember { mutableStateOf(LevelEnum.LOW) }
+
+    val sizeBoard = when(level) {
+        LevelEnum.LOW -> 8
+        LevelEnum.MEDIUM -> 10
+        LevelEnum.HIGH -> 12
+    }
+    val board = Array(sizeBoard * sizeBoard) {0}
 
     when(gameState){
         GameStateEnum.LEVEL ->  {
@@ -103,8 +112,8 @@ fun GameScreen(modifier: Modifier = Modifier) {
                 LazyVerticalGrid(
                     columns = GridCells.Fixed(8)
                 ) {
-                    items(8*8 ) {
-                        index -> Cell(index)
+                    items(sizeBoard*sizeBoard ) {
+                        index -> Cell(index, board)
                     }
                 }
             }
@@ -113,12 +122,18 @@ fun GameScreen(modifier: Modifier = Modifier) {
 }
 
 @Composable
-fun Cell(index: Int){
+fun Cell(index: Int, board: Array<Int>){
     Box(
         modifier = Modifier.size(30.dp)
             .background(Color.Red),
     ){
-        Text(index.toString())
+        if (board[index-1] == 2){
+            Text("2")
+        } else if (board[index-1] == 1) {
+            Text("1")
+        } else {
+            Text("b")
+        }
 
     }
 }
