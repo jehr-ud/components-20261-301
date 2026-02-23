@@ -127,7 +127,7 @@ fun Cell(index: Int){
     {
         Text(index.toString(),
             modifier = Modifier.fillMaxWidth(),
-            textAlign = TextAlign.Center
+            textAlign = TextAlign.Center,
         )
 
     }
