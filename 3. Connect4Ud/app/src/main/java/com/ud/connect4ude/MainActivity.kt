@@ -11,6 +11,7 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
+import com.ud.connect4ude.ui.menu.MainNavigation
 import com.ud.connect4ude.ui.screens.LoginScreen
 import com.ud.connect4ude.ui.theme.Connect4UdeTheme
 
@@ -21,7 +22,8 @@ class MainActivity : ComponentActivity() {
         setContent {
             Connect4UdeTheme {
                 Scaffold(modifier = Modifier.fillMaxSize()) {
-                    LoginScreen()
+                    MainNavigation()
+                    // LoginScreen()
                 }
             }
         }
