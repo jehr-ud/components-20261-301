@@ -1,6 +1,7 @@
 package com.ud.connect4ude.ui.screens
 
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.material3.Button
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextField
@@ -9,20 +10,21 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
+import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 
 
 @Composable
-fun LoginScreen(){
-    var userName by remember { mutableStateOf("") }
+fun LoginScreen(onLoginSuccess: (String, String) -> Unit){
+    var email by remember { mutableStateOf("") }
     var password by remember { mutableStateOf("") }
 
     Column() {
-        Text("Username")
+        Text("Email")
 
         TextField(
-            value = userName,
-            onValueChange = { userName = it },
+            value = email,
+            onValueChange = { email = it },
             label = { Text("Etiqueta") }
         )
 
@@ -34,8 +36,11 @@ fun LoginScreen(){
             label = { Text("Etiqueta") }
         )
 
-        Button(onClick = {}) {
-            Text("Log in")
+        Button(
+            onClick = { onLoginSuccess(email, password) },
+            modifier = Modifier.fillMaxWidth()
+        ) {
+            Text("Iniciar Sesión")
         }
     }
 }
@@ -43,5 +48,5 @@ fun LoginScreen(){
 @Preview
 @Composable
 fun LoginScreenPrev(){
-    LoginScreen()
+    LoginScreen(onLoginSuccess =  { email, password -> {}})
 }

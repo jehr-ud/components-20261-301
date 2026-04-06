@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "610900640373",
+    "project_id": "connec4ud",
+    "storage_bucket": "connec4ud.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:610900640373:android:0466ea8683a05a07b5ee3c",
+        "android_client_info": {
+          "package_name": "com.ud.connect4ude"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDykO-weTcSGbE24h2KvoIoy2m-iRd-IQU"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
