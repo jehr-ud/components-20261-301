@@ -19,6 +19,6 @@ dependencyResolutionManagement {
     }
 }
 
-rootProject.name = "Connect4Ude"
+rootProject.name = "Connect4Ud"
 include(":app")
  
