@@ -1,49 +1,72 @@
 package com.ud.connect4ude.ui.screens
 
-import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.text.input.TextFieldLineLimits
-import androidx.compose.foundation.text.input.rememberTextFieldState
-import androidx.compose.material3.Button
-import androidx.compose.material3.Text
-import androidx.compose.material3.TextField
-import androidx.compose.runtime.Composable
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
-import androidx.compose.runtime.setValue
+import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.text.KeyboardOptions
+import androidx.compose.material3.*
+import androidx.compose.runtime.*
+import androidx.compose.ui.Alignment
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.text.input.KeyboardType
+import androidx.compose.ui.text.input.PasswordVisualTransformation
+import androidx.compose.ui.unit.dp
 import androidx.compose.ui.tooling.preview.Preview
 
-
 @Composable
-fun LoginScreen(){
+fun LoginScreen() {
     var userName by remember { mutableStateOf("") }
     var password by remember { mutableStateOf("") }
 
-    Column() {
-        Text("Username")
+    val isFormValid = userName.isNotBlank() && password.isNotBlank()
 
-        TextField(
+    Column(
+        modifier = Modifier
+            .fillMaxSize()
+            .padding(24.dp),
+        verticalArrangement = Arrangement.Center,
+        horizontalAlignment = Alignment.CenterHorizontally
+    ) {
+
+        Text(
+            text = "Iniciar sesión",
+            style = MaterialTheme.typography.headlineMedium
+        )
+
+        Spacer(modifier = Modifier.height(32.dp))
+
+        OutlinedTextField(
             value = userName,
             onValueChange = { userName = it },
-            label = { Text("Etiqueta") }
+            label = { Text("Usuario") },
+            singleLine = true,
+            modifier = Modifier.fillMaxWidth()
         )
 
-        Text("password")
+        Spacer(modifier = Modifier.height(16.dp))
 
-        TextField(
+        OutlinedTextField(
             value = password,
             onValueChange = { password = it },
-            label = { Text("Etiqueta") }
+            label = { Text("Contraseña") },
+            singleLine = true,
+            visualTransformation = PasswordVisualTransformation(),
+            keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Password),
+            modifier = Modifier.fillMaxWidth()
         )
 
-        Button(onClick = {}) {
-            Text("Log in")
+        Spacer(modifier = Modifier.height(24.dp))
+
+        Button(
+            onClick = { },
+            enabled = isFormValid,
+            modifier = Modifier.fillMaxWidth()
+        ) {
+            Text("Ingresar")
         }
     }
 }
 
-@Preview
+@Preview(showBackground = true)
 @Composable
-fun LoginScreenPrev(){
+fun LoginScreenPrev() {
     LoginScreen()
 }
