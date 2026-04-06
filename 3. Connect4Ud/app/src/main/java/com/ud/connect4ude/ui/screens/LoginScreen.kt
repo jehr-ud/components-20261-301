@@ -10,7 +10,7 @@ import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.tooling.preview.Preview
-//incio de sesion
+//incio de sesion bonito
 @Composable
 fun LoginScreen() {
     var userName by remember { mutableStateOf("") }
