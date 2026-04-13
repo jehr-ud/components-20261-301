@@ -1,0 +1,8 @@
+package com.ud.connect4ude.models
+
+sealed class AuthUiState {
+    object Idle : AuthUiState()
+    object Loading : AuthUiState()
+    data class Success(val userEmail: String) : AuthUiState()
+    data class Error(val message: String) : AuthUiState()
+}
