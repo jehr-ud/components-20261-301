@@ -56,6 +56,7 @@ dependencies {
 
     implementation("androidx.compose.material:material-icons-core")
     implementation("androidx.compose.material:material-icons-extended")
+    implementation("com.google.code.gson:gson:2.10.1")
 
     implementation(platform(libs.firebase.bom))
     implementation(libs.firebase.auth)
