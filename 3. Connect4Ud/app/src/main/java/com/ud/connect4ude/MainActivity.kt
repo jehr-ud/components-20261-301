@@ -18,6 +18,8 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.viewmodel.compose.viewModel
 import com.google.firebase.Firebase
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.auth
@@ -26,13 +28,11 @@ import com.ud.connect4ude.ui.menu.MainNavigation
 import com.ud.connect4ude.ui.screens.LoginScreen
 import com.ud.connect4ude.ui.theme.Connect4UdeTheme
 import com.ud.riddle.viewmodels.AuthViewModel
-import kotlin.getValue
-
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
 
-        val authViewModel: AuthViewModel by viewModels()
+        val authViewModel: AuthViewModel = AuthViewModel(this.application)
 
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()

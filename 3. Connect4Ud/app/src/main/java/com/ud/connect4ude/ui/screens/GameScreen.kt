@@ -1,5 +1,6 @@
 package com.ud.connect4ude.ui.screens
 
+import android.app.Application
 import android.widget.Toast
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
@@ -23,14 +24,22 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.dp
+import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.ud.connect4ude.models.AuthUiState
 import com.ud.connect4ude.models.GameStatus
 import com.ud.connect4ude.repositories.GameRepository
 import com.ud.connect4ude.viewmodels.GameViewModel
+import com.ud.riddle.viewmodels.AuthViewModel
 
 @Composable
-fun GameScreen(viewModel: GameViewModel = viewModel()) {
+fun GameScreen() {
+    val context = LocalContext.current
+    val application = context.applicationContext as Application
+
+    val viewModel: GameViewModel = viewModel(
+        factory = ViewModelProvider.AndroidViewModelFactory.getInstance(application)
+    )
     val game by viewModel.gameState.collectAsState()
     var codeInput by remember { mutableStateOf("") }
     val uiState by viewModel.uiState.collectAsState()

@@ -2,6 +2,7 @@ package com.ud.connect4ude.viewmodels
 
 
 import android.app.Application
+import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.ViewModel
 import com.google.firebase.database.ValueEventListener
 import com.ud.connect4ude.models.AuthUiState
@@ -14,7 +15,7 @@ import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
 
 
-class GameViewModel(application: Application) : ViewModel() {
+class GameViewModel(application: Application) : AndroidViewModel(application){
     private val repository = GameRepository()
     private val userPrefs = UserPreferences(application)
 

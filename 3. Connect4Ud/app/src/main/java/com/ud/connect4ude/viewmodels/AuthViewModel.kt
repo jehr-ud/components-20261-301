@@ -1,6 +1,7 @@
 package com.ud.riddle.viewmodels
 
 import android.app.Application
+import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.ud.connect4ude.models.AuthUiState
@@ -12,7 +13,7 @@ import kotlinx.coroutines.flow.asSharedFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
 
-class AuthViewModel(application: Application): ViewModel() {
+class AuthViewModel(application: Application): AndroidViewModel(application) {
 
     private val userPrefs = UserPreferences(application)
     private val repository = AuthRepository()
