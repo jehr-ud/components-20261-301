@@ -1,7 +1,6 @@
 package com.ud.connect4ude.ui.screens
 
 import android.app.Application
-import android.widget.Toast
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
@@ -14,6 +13,7 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextField
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -28,9 +28,8 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.ud.connect4ude.models.AuthUiState
 import com.ud.connect4ude.models.GameStatus
-import com.ud.connect4ude.repositories.GameRepository
+import com.ud.connect4ude.viewmodels.ConfViewModel
 import com.ud.connect4ude.viewmodels.GameViewModel
-import com.ud.riddle.viewmodels.AuthViewModel
 
 @Composable
 fun GameScreen() {
@@ -40,15 +39,35 @@ fun GameScreen() {
     val viewModel: GameViewModel = viewModel(
         factory = ViewModelProvider.AndroidViewModelFactory.getInstance(application)
     )
+
+    val confViewModel: ConfViewModel = viewModel()
+    val config by confViewModel.config.collectAsState()
+    val loadingConfig by confViewModel.loading.collectAsState()
+    val errorConfig by confViewModel.error.collectAsState()
+
+    LaunchedEffect(Unit) {
+        confViewModel.getConfig()
+    }
+
     val game by viewModel.gameState.collectAsState()
     var codeInput by remember { mutableStateOf("") }
     val uiState by viewModel.uiState.collectAsState()
 
     Column(
-        modifier = Modifier.fillMaxSize().padding(16.dp),
+        modifier = Modifier
+            .fillMaxSize()
+            .padding(16.dp),
         horizontalAlignment = Alignment.CenterHorizontally,
         verticalArrangement = Arrangement.Center
     ) {
+
+        if (loadingConfig) {
+            CircularProgressIndicator()
+        }
+
+        if (errorConfig != null) {
+            Text(text = errorConfig!!, color = Color.Red)
+        }
 
         if (uiState is AuthUiState.Error) {
             Text(
