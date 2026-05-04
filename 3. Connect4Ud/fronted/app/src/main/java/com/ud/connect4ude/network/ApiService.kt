@@ -6,6 +6,6 @@ import retrofit2.http.GET
 import retrofit2.http.Path
 
 interface ApiService {
-    @GET("/game/{game}/config")
+    @GET("game/{game}/config")
     fun getConfig(@Path("game") game: String): Call<ConfigResponse>
 }
