@@ -7,13 +7,14 @@ import com.google.firebase.database.ValueEventListener
 import com.google.firebase.database.database
 import com.ud.connect4ude.models.Game
 import com.ud.connect4ude.models.GameStatus
+import com.ud.connect4ude.utils.Encode
 
 class GameRepository {
     private val database = Firebase.database
     private val gameRef = database.getReference("games")
 
     fun createGame(hostUid: String, onComplete: (String) -> Unit) {
-        val code = gameRef.push().key ?: return
+        val code = Encode().encodeBase62(System.currentTimeMillis())
         val game = Game(
             code = code,
             player1 = hostUid,
