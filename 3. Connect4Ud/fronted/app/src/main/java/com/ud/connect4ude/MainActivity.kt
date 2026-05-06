@@ -15,35 +15,43 @@ import com.ud.connect4ude.models.AuthUiState
 import com.ud.connect4ude.ui.menu.MainNavigation
 import com.ud.connect4ude.ui.screens.LoginScreen
 import com.ud.connect4ude.ui.theme.Connect4UdeTheme
+import com.ud.connect4ude.utils.UserPreferences
 import com.ud.riddle.viewmodels.AuthViewModel
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
 
         val authViewModel: AuthViewModel = AuthViewModel(this.application)
+        val userPrefs = UserPreferences(this.application)
 
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
         setContent {
             Connect4UdeTheme {
                 Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
+                    val currentUser = userPrefs.getUser()
 
-                    val uiState by authViewModel.uiState.collectAsState()
-
-                    Box(
-                        modifier = Modifier
-                            .fillMaxSize()
-                            .padding(innerPadding)
-                    ) {
-                        when (uiState) {
-                            is AuthUiState.Success -> {
-                                MainNavigation()
-                            }
-                            else -> {
-                                LoginScreen(authViewModel)
+                    if (currentUser != null){
+                        MainNavigation()
+                    } else {
+                        val uiState by authViewModel.uiState.collectAsState()
+                        Box(
+                            modifier = Modifier
+                                .fillMaxSize()
+                                .padding(innerPadding)
+                        ) {
+                            when (uiState) {
+                                is AuthUiState.Success -> {
+                                    MainNavigation()
+                                }
+                                else -> {
+                                    LoginScreen(authViewModel)
+                                }
                             }
                         }
                     }
+
+
                 }
             }
         }
